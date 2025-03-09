@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a5232;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; /* Adicionado para organizar os elementos verticalmente */
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: auto; /* Alterado para auto para ajustar ao conteúdo */
+            max-width: 1200px; /* Adicionado para limitar a largura em telas grandes */
+        }
+
+        .image-container {
+            width: 30%;
+            text-align: left;
+        }
+
+        .image-container img {
+            width: 200px;
+            height: 400px;
+            border-radius: 20px;
+        }
+
+        .title-container {
+            width: 30%;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 40%;
+            text-align: right;
+        }
+
+        #resultados {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px; /* Adicionado para espaçamento */
+        }
+
+        #resultados h3, #resultados h4 {
+            color: white; /* Adicionado para melhorar a visibilidade do texto */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="CELULAR.png" alt="Imagem no celular">
+            <h1>Calculadora de ganhos para Motorista de apps (99, Uber, iDrive)</h1>
+        </div>
+        <div class="form-container">
+            <form>
+                <p>Ganho pretendido:
+                    <input type="number" id="inGanho" required>
+                </p>
+                <p>Km rodado por Mês:
+                    <input type="number" id="inKm" required>
+                </p>
+                <p>Média de consumo:
+                    <input type="number" min="0" step="0.01" id="inConsumo" required>
+                </p>
+                <p>Preço do combustível:
+                    <input type="number" min="0" step="0.01" id="inCombustivel" required>
+                </p>
+                <input type="submit" value="Calcular Ganhos">
+                <input type="reset" value="Limpar Campos">
+            </form>
+        </div>
+    </div>
+    <div id="resultados">
+        <h3></h3>
+        <h4></h4>
+    </div>
+    <script>
+        const frm = document.querySelector("form");
+        const resp1 = document.querySelector("#resultados h3");
+        const resp2 = document.querySelector("#resultados h4");
+
+        frm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const Ganho = Number(frm.inGanho.value);
+            const Km = Number(frm.inKm.value);
+            const Resultado1 = (Ganho / Km);
+            const Media = Number(frm.inConsumo.value);
+            const Valor = Number(frm.inCombustivel.value);
+            const Resultado2 = (Km / Media) * Valor;
+
+            resp1.innerText = `Para ganhar o valor pretendido você deverá ganhar ${Resultado1.toFixed(2)} por Km!`;
+            resp2.innerText = `O consumo de combustível por mês será: ${Resultado2.toFixed(2)}!!!`;
+        });
+    </script>
+</body>
+</html>
